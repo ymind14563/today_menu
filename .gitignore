@@ -1,0 +1,25 @@
+# Python bytecode files
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE settings
+.idea/
+.vscode/
+
+# Virtual environments
+env/
+venv/
+__env__
+
+# Logs
+*.log
+
+# Database files
+*.db
+*.sqlite3
+
+# Distribution and packaging
+dist/
+build/
+*.egg-info/
