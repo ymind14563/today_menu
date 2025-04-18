@@ -1,5 +1,9 @@
 # today_menu
 
+### pip install -r requirements.txt
+
+
+<br>
 
 ## ✅ 목표
 - **식당 2곳의 메뉴판 이미지를 매일 자동으로 수집하고 웹에 표시**
