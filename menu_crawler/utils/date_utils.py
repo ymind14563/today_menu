@@ -17,10 +17,10 @@ def is_today_in_title(title: str) -> bool:
     m, d = today.month, today.day
 
     today_str = f"{m}월 {d}일"
-    print(f"[디버그] 오늘 날짜 기준 문자열: '{today_str}' / 대상 제목: '{title}'") 
     
     # 정규식: 월과 일이 떨어져 있거나 중간 단어 있는 것도 허용
     pattern = rf"{m}\s*월[^0-9a-zA-Z가-힣]{{0,5}}{d}\s*일"
+    
     return re.search(pattern, title) is not None
     # return "4월 18일"
     
