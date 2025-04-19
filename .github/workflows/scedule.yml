@@ -17,6 +17,7 @@ jobs:
         id: check
         run: |
           echo "last_urls.json 조회 중..."
+          export TZ=Asia/Seoul
           TODAY=$(date '+%Y-%m-%d')
           echo "오늘 날짜: $TODAY"
 
