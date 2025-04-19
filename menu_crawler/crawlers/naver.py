@@ -28,28 +28,28 @@ def get_naver_menu_image_url() -> Optional[str]:
     try:
         # iframe 진입
         driver.switch_to.frame("mainFrame")
-        logger.info("[네이버system] iframe 'mainFrame' 진입 완료")
+        logger.info("[네이버] iframe 'mainFrame' 진입 완료")
         time.sleep(2)
 
         # 전체보기 클릭
         menu = driver.find_element(By.LINK_TEXT, "전체보기")
         menu.click()
-        logger.info("[네이버system] '전체보기' 클릭 완료")
+        logger.info("[네이버] '전체보기' 클릭 완료")
         time.sleep(2)
 
         # 글 목록 탐색
         container = driver.find_element(By.ID, "postBottomTitleListBody")
         posts = container.find_elements(By.CSS_SELECTOR, "a.pcol2")
-        logger.info(f"[네이버system] 글 목록 진입 완료")
-        logger.info(f"[네이버system] 추출된 글 개수: {len(posts)}")
+        logger.info(f"[네이버] 글 목록 진입 완료")
+        logger.info(f"[네이버] 추출된 글 개수: {len(posts)}")
         time.sleep(2)
 
         found = False
         for post in posts:
             title = post.text.strip()
-            logger.info(f"[네이버system] 제목 확인")
+            logger.info(f"[네이버] 제목 확인")
             if is_today_in_title(title):
-                logger.info(f"[네이버system] 오늘 날짜 글 발견: '{title}'")
+                logger.info(f"[네이버] 오늘 날짜 글 발견: '{title}'")
                 post.click()
                 found = True
                 time.sleep(1)
@@ -58,7 +58,7 @@ def get_naver_menu_image_url() -> Optional[str]:
         
 
         if not found:
-            logger.info("[네이버결과] 유효한 메뉴 이미지 없음")
+            logger.info(">>> [네이버-결과] 유효한 메뉴 이미지 없음")
             driver.quit()
             time.sleep(2)
             return None
@@ -68,12 +68,12 @@ def get_naver_menu_image_url() -> Optional[str]:
         # iframe 재지정
         driver.switch_to.default_content()
         driver.switch_to.frame("mainFrame")
-        logger.info("[네이버system] iframe 'mainFrame' 재진입 완료")
+        logger.info("[네이버] iframe 'mainFrame' 재진입 완료")
         time.sleep(2)
 
         # 이미지 추출
         images = driver.find_elements(By.CSS_SELECTOR, "div[id^='post-view'] img")
-        logger.info(f"[네이버system] 이미지 추출 시작")
+        logger.info(f"[네이버] 이미지 추출 시작")
 
         for img in images:
             src = img.get_attribute("src")
