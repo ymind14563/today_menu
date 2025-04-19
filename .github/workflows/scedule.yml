@@ -60,10 +60,12 @@ jobs:
       - name: git push, html 업데이트
         if: steps.check.outputs.run-crawler == 'true'
         env:
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SECRET_TOKEN: ${{ secrets.today_menu_token }}
         run: |
           git config --global user.name "ymind14563"
           git config --global user.email "ymind14563@gmail.com"
+          git remote set-url origin https://${SECRET_TOKEN}@github.com/ymind14563/today_menu.git
           git add docs/
           git commit -m "업데이트: $(date '+%Y-%m-%d %H:%M')" || echo "변경사항 없음"
           git push
+        
