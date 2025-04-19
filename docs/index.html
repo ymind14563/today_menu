@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>오늘의 메뉴</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans p-6">
+
+  <h1 class="text-3xl font-bold text-center mb-8">🍱 오늘의 메뉴</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+
+    <!-- 카카오 카드 -->
+    <div class="flex flex-col justify-between bg-white p-5 rounded-xl shadow border w-full max-w-md mx-auto sm:min-h-[580px]">
+      <div>
+        <h2 class="text-3xl font-semibold text-center mb-5 text-gray-700">2층</h2>
+        <div id="kakao_img" class="text-center mb-5">
+          <img class="w-full sm:w-11/12 h-auto mx-auto rounded-md" src="" alt="카카오 메뉴" />
+        </div>
+      </div>
+      <div class="mt-3">
+        <div id="kakao_status" class="mb-2 w-full max-w-[260px] mx-auto"></div>
+        <div id="kakao_timeinfo" class="w-full max-w-[260px] mx-auto"></div>
+      </div>
+    </div>
+
+    <!-- 네이버 카드 -->
+    <div class="flex flex-col justify-between bg-white p-5 rounded-xl shadow border w-full max-w-md mx-auto sm:min-h-[580px]">
+      <div>
+        <h2 class="text-3xl font-semibold text-center mb-5 text-gray-700">옆집</h2>
+        <div id="naver_img" class="text-center mb-5">
+          <img class="w-full sm:w-11/12 h-auto mx-auto rounded-md" src="" alt="네이버 메뉴" />
+        </div>
+      </div>
+      <div class="mt-3">
+        <div id="naver_status" class="mb-2 w-full max-w-[260px] mx-auto"></div>
+        <div id="naver_timeinfo" class="w-full max-w-[260px] mx-auto"></div>
+      </div>
+    </div>
+
+    <!-- 공지사항 -->
+    <div class="md:col-span-2 bg-gray-100 p-5 rounded-xl shadow mt-4 text-sm text-left leading-relaxed text-gray-700">
+      ⚠️ 점심 메뉴는 <strong>오전 9시부터 13시 사이</strong>에 자동 업데이트됩니다.<br />
+      ⚠️ 출처 이미지 업로드가 이루어지지 않을 경우, 업데이트가 되지 않을 수 있습니다.<br />
+      ⚠️ 이미지 업로드 지연으로 인해 <strong>이전 메뉴</strong>가 남아 있을 수 있으니, <strong>업데이트 시간</strong>을 확인해주세요.
+    </div>
+
+    <!-- 출처 -->
+    <div class="md:col-span-2 bg-white p-4 rounded-xl shadow mt-4 text-sm text-left text-gray-700">
+      <p class="mb-1">🌐 <strong>2층 (에이스굿푸드)</strong>: 
+        <a href="https://pf.kakao.com/_xdxagIn" class="text-blue-600 underline" target="_blank">https://pf.kakao.com/_xdxagIn</a>
+      </p>
+      <p>📎 <strong>옆집 (오늘의 밥상)</strong>: 
+        <a href="https://blog.naver.com/skfoodcompany" class="text-blue-600 underline" target="_blank">https://blog.naver.com/skfoodcompany</a>
+      </p>
+    </div>
+  </div>
+
+    <!-- 기술 스택 -->
+    <div class="md:col-span-2 bg-white p-4 rounded-xl shadow mt-4 text-sm font-semibold text-left text-gray-700 flex flex-wrap items-center gap-4">
+      <div class="flex items-center gap-2">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="w-5 h-5" />
+      <span>Python 3</span>
+      </div>
+      <div class="flex items-center gap-2">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Selenium_Logo.png" alt="Selenium" class="w-5 h-5" />
+      <span>Selenium</span>
+      </div>
+      <div class="flex items-center gap-2">
+      <img src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg" alt="Tailwind CSS" class="w-5 h-5" />
+      <span>Tailwind</span>
+      </div>
+      <div class="flex items-center gap-2">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub Actions" class="w-5 h-5" />
+      <span>GitHub Actions</span>
+      </div>
+      <div class="flex items-center gap-2">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub Pages" class="w-5 h-5" />
+      <span>GitHub Pages</span>
+      </div>
+    </div>
+    
+
+  
+  <script>
+    const now = new Date();
+    const today = now.toISOString().split("T")[0];
+
+    const formatTime = (date) => {
+      const yyyy = date.getFullYear();
+      const mm = String(date.getMonth() + 1).padStart(2, '0');
+      const dd = String(date.getDate()).padStart(2, '0');
+      const hh = String(date.getHours()).padStart(2, '0');
+      const min = String(date.getMinutes()).padStart(2, '0');
+      return `${yyyy}-${mm}-${dd} ${hh}:${min}`;
+    };
+
+    const currentTimeStr = formatTime(now);
+
+    fetch("last_urls.json")
+      .then(res => res.json())
+      .then(data => {
+        ["kakao", "naver"].forEach(site => {
+          const info = data[site];
+          if (!info) return;
+
+          const fullTime = info.saved_date;
+          const isToday = fullTime.startsWith(today);
+
+          const statusColor = isToday ? "bg-green-50 text-green-700" : "bg-yellow-50 text-yellow-700";
+          const statusMsg = isToday ? "✅ 오늘 메뉴 업데이트 완료" : "⚠️ 아직 오늘 메뉴가 올라오지 않음";
+
+          document.getElementById(`${site}_img`).querySelector("img").src = info.url;
+
+          const statusBox = document.getElementById(`${site}_status`);
+          statusBox.className = `rounded-md py-2 px-3 text-lg text-center font-bold ${statusColor}`;
+          statusBox.textContent = statusMsg;
+
+          const timeBox = document.getElementById(`${site}_timeinfo`);
+          timeBox.className =
+            "bg-gray-100 rounded-md py-2 px-3 mt-3 text-sm text-center font-mono text-gray-700 whitespace-pre-line";
+          timeBox.textContent =
+            `🕒  업데이트 시각 :  ${fullTime}\n🕒  현재 시각    :  ${currentTimeStr}`;
+
+        });
+      });
+  </script>
+
+</body>
+</html>
