@@ -1,14 +1,17 @@
 # 모든 설정값을 중앙에서 관리
 
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 import os
+
+# KST 시간대 정의
+KST = timezone(timedelta(hours=9))
 
 # 사이트 URL
 NAVER_BLOG_URL = "https://blog.naver.com/skfoodcompany"
 KAKAO_CHANNEL_URL = "https://pf.kakao.com/_xdxagIn"
 
 # 날짜 포맷 (오늘 날짜 기준, 예: '4월 18일')
-TODAY = datetime.now()
+TODAY = datetime.now(KST)
 TODAY_DATE_STR = f"{TODAY.month}월 {TODAY.day}일"
 
 # 비교용 저장 파일 경로

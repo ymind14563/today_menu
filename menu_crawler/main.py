@@ -3,12 +3,14 @@ from crawlers.kakao import get_kakao_menu_image_url
 from utils.storage import load_last_urls, save_last_urls, is_new_url
 from utils.date_utils import get_today_date_string
 from utils.logger import logger
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
+
+KST = timezone(timedelta(hours=9))
 
 def main():
-    logger.info(f"[System] 오늘 날짜: {get_today_date_string()}\n")
+    logger.info(f"[System] 오늘 날짜: {get_today_date_string(KST)}\n")
 
-    now = datetime.now()
+    now = datetime.now(KST)
     now_str = now.strftime("%Y-%m-%d %H:%M")
     today_date = now.strftime("%Y-%m-%d")
 

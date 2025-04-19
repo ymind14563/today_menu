@@ -1,19 +1,22 @@
 # 날짜 판별 로직
 
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from typing import Optional
 import re
 
+# KST 시간대 정의
+KST = timezone(timedelta(hours=9))
+
 # 오늘 날짜를 '4월 18일' 형식으로 변경
-def get_today_date_string():
-    now = datetime.now()
+def get_today_date_string(KST):
+    now = datetime.now(KST)
     return f"{now.month}월 {now.day}일"
 
 
 # 글 제목에 오늘 날짜가 포함되어 있는지 확인
 # -> '4월18일', '4 월 18 일', '4월 오전 18일' 등 포함 허용
 def is_today_in_title(title: str) -> bool:
-    today = datetime.now()
+    today = datetime.now(KST)
     m, d = today.month, today.day
 
     today_str = f"{m}월 {d}일"

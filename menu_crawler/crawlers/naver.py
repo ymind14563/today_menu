@@ -47,7 +47,7 @@ def get_naver_menu_image_url() -> Optional[str]:
         found = False
         for post in posts:
             title = post.text.strip()
-            logger.info(f"[네이버] 제목 확인")
+            logger.info(f"[네이버] 제목 확인: {title}")
             if is_today_in_title(title):
                 logger.info(f"[네이버] 오늘 날짜 글 발견: '{title}'")
                 post.click()

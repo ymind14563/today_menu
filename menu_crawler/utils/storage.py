@@ -3,8 +3,10 @@
 import json
 import os
 from config import LAST_URLS_PATH
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 
+# KST 시간대 정의
+KST = timezone(timedelta(hours=9))
 
 # 이전 이미지 URL 목록 불러오기
 def load_last_urls() -> dict:
@@ -33,7 +35,7 @@ def is_new_url(site_key: str, url: str, last_data: dict) -> tuple[bool, bool]:
     except:
         saved_date_only = None
 
-    today = datetime.now().strftime("%Y-%m-%d")
+    today = datetime.now(KST).strftime("%Y-%m-%d")
     is_today = saved_date_only == today
     is_new = url != saved_url
 
