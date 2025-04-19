@@ -21,8 +21,8 @@ def is_today_in_title(title: str) -> bool:
     
     # 정규식: 월과 일이 떨어져 있거나 중간 단어 있는 것도 허용
     pattern = rf"{m}\s*월[^0-9a-zA-Z가-힣]{{0,5}}{d}\s*일"
-    # return re.search(pattern, title) is not None
     return re.search(pattern, title) is not None
+    # return "4월 18일"
     
 
 

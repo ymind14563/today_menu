@@ -1,4 +1,10 @@
 {
-  "kakao": "https://k.kakaocdn.net/dn/dS3f7x/btsNpaWlanY/VTdDtWSkSOV5YEkflH8Jo1/img_xl.jpg",
-  "naver": "https://postfiles.pstatic.net/MjAyNTA0MTdfMTA4/MDAxNzQ0ODgwOTU2NTQz.3bQlXrix4G9Yr7_RERbyxTrbP36vUVm-6ZRSMoivWt0g.BPCQ9WB6KdmKisKrcFQ_uFZvI1tY0a9wxYW0rR1ZkpYg.JPEG/900%EF%BC%BF20250417%EF%BC%BF180817.jpg?type=w773"
+  "kakao": {
+    "url": "https://k.kakaocdn.net/dn/dS3f7x/btsNpaWlanY/VTdDtWSkSOV5YEkflH8Jo1/img_xl.jpg",
+    "saved_date": "2025-04-19"
+  },
+  "naver": {
+    "url": "https://postfiles.pstatic.net/MjAyNTA0MTdfMTA4/MDAxNzQ0ODgwOTU2NTQz.3bQlXrix4G9Yr7_RERbyxTrbP36vUVm-6ZRSMoivWt0g.BPCQ9WB6KdmKisKrcFQ_uFZvI1tY0a9wxYW0rR1ZkpYg.JPEG/900%EF%BC%BF20250417%EF%BC%BF180817.jpg?type=w773",
+    "saved_date": "2025-04-19"
+  }
 }
