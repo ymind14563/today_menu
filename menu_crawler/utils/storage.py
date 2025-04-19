@@ -21,11 +21,21 @@ def save_last_urls(data: dict):
 
 # 새로운 이미지 URL인지 확인
 def is_new_url(site_key: str, url: str, last_data: dict) -> tuple[bool, bool]:
-    today_str = datetime.now().strftime("%Y-%m-%d")
-    info = last_data.get(site_key)
-    if isinstance(info, dict):
-        saved_url = info.get("url")
-        saved_date = info.get("saved_date")
-        if url == saved_url:
-            return False, saved_date == today_str  # (같음, 오늘 저장된 것인지)
-    return True, False  # (다름, 저장된 게 없음)
+    saved = last_data.get(site_key)
+    if not saved:
+        return True, False
+
+    saved_url = saved.get("url")
+    saved_datetime = saved.get("saved_date")  # "2025-04-19 18:35"
+
+    try:
+        saved_date_only = saved_datetime.split(" ")[0]  # "2025-04-19"
+    except:
+        saved_date_only = None
+
+    today = datetime.now().strftime("%Y-%m-%d")
+    is_today = saved_date_only == today
+    is_new = url != saved_url
+
+    return is_new, is_today
+
