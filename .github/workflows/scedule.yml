@@ -60,7 +60,7 @@ jobs:
       - name: git push, html 업데이트
         if: steps.check.outputs.run-crawler == 'true'
         env:
-          SECRET_TOKEN: ${{ secrets.today_menu_token }}
+          SECRET_TOKEN: ${{ secrets.TODAY_MENU_TOKEN }}
         run: |
           git config --global user.name "ymind14563"
           git config --global user.email "ymind14563@gmail.com"
