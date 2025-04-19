@@ -78,7 +78,7 @@ def get_naver_menu_image_url() -> Optional[str]:
         for img in images:
             src = img.get_attribute("src")
             if src and src.startswith("https://postfiles.pstatic.net"):
-                logger.info(">>> [네이버-결과] 메뉴 이미지 추출 완료", src)
+                logger.info(f">>> [네이버-결과] 메뉴 이미지 추출 완료: {src}")
                 time.sleep(1) 
                 driver.quit()
                 time.sleep(1)

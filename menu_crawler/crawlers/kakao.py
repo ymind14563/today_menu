@@ -43,7 +43,7 @@ def get_kakao_menu_image_url() -> Optional[str]:
             EC.presence_of_element_located((By.CSS_SELECTOR, ".layer_body .img_thumb"))
         )
         src = img.get_attribute("src")
-        logger.info(">>> [카카오-결과] 메뉴 이미지 추출 완료")
+        logger.info(f">>> [카카오-결과] 메뉴 이미지 추출 완료: {src}")
         time.sleep(1) 
         driver.quit()
         time.sleep(1)
