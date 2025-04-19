@@ -13,7 +13,7 @@ TODAY_DATE_STR = f"{TODAY.month}월 {TODAY.day}일"
 
 # 비교용 저장 파일 경로
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-LAST_URLS_PATH = os.path.join(PROJECT_ROOT, "last_urls.json")
+LAST_URLS_PATH = os.path.join(PROJECT_ROOT, "docs/last_urls.json")
 
 # 유저 에이전트 공통 상수
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
