@@ -1,0 +1,67 @@
+name: Daily Menu Crawler
+
+on:
+  schedule:
+    - cron: '0,30 1-4 * * 1-5'  # 월~금, 10:00~13:00 (KST 기준 / UTC 기준 1~4시)
+  workflow_dispatch:
+
+jobs:
+  crawl-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: 크롤링 필요 여부 확인
+        id: check
+        run: |
+          echo "last_urls.json 조회 중..."
+          TODAY=$(date '+%Y-%m-%d')
+          echo "오늘 날짜: $TODAY"
+
+          if [ ! -f last_urls.json ]; then
+            echo "last_urls.json 파일이 없음. 크롤링 수행 필요."
+            echo "run-crawler=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          N_URL=$(jq -r '.naver.saved_date // ""' last_urls.json)
+          K_URL=$(jq -r '.kakao.saved_date // ""' last_urls.json)
+
+          echo "N_URL=$N_URL"
+          echo "K_URL=$K_URL"
+
+          if [[ "$N_URL" == "$TODAY"* && "$K_URL" == "$TODAY"* ]]; then
+            echo "두 메뉴 모두 오늘자로 저장되어 있습니다. 크롤링 생략."
+            echo "run-crawler=false" >> $GITHUB_OUTPUT
+          else
+            echo "하나 이상 오늘자 아님 → 크롤링 필요"
+            echo "run-crawler=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Python 세팅
+        if: steps.check.outputs.run-crawler == 'true'
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: dependencies 설치 (requirements.txt)
+        if: steps.check.outputs.run-crawler == 'true'
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 크롤링 시작
+        if: steps.check.outputs.run-crawler == 'true'
+        run: |
+          python menu_crawler/main.py
+
+      - name: git push, html 업데이트
+        if: steps.check.outputs.run-crawler == 'true'
+        run: |
+          git config --global user.name "ymind14563"
+          git config --global user.email "ymind14563@gmail.com"
+          git add docs/
+          git commit -m "업데이트: $(date '+%Y-%m-%d %H:%M')" || echo "변경사항 없음"
+          git push
