@@ -2,7 +2,15 @@ name: Daily Menu Crawler
 
 on:
   schedule:
-    - cron: '0,30 1-4 * * 1-5'  # 월~금, 10:00~13:00 (KST 기준)
+    # UTC 00:00~01:30 = KST 09:00~10:30 (30분, 월 ~ 금)
+    - cron: '0,30 0-1 * * 1-5'
+
+    # UTC 02:00~02:50 = KST 11:00~11:50 (10분, 월 ~ 금)
+    - cron: '0,10,20,30,40,50 2 * * 1-5'
+
+    # UTC 03:00~03:30 = KST 12:00~12:30 (5분, 월 ~ 금)
+    - cron: '0,5,10,15,20,25,30 3 * * 1-5'
+
   workflow_dispatch:
 
 jobs:
@@ -30,13 +38,13 @@ jobs:
             exit 0
           fi
 
-          N_URL=$(jq -r '.naver.saved_date // ""' last_urls.json)
-          K_URL=$(jq -r '.kakao.saved_date // ""' last_urls.json)
+          N_Date=$(jq -r '.naver.saved_date // ""' last_urls.json)
+          K_Date=$(jq -r '.kakao.saved_date // ""' last_urls.json)
 
-          echo "N_URL=$N_URL"
-          echo "K_URL=$K_URL"
+          echo "N_Date=$N_Date"
+          echo "K_Date=$K_Date"
 
-          if [[ "$N_URL" == "$TODAY"* && "$K_URL" == "$TODAY"* ]]; then
+          if [[ "$N_Date" == "$TODAY"* && "$K_Date" == "$TODAY"* ]]; then
             echo "두 메뉴 모두 오늘자로 저장되어 있습니다. 크롤링 생략."
             echo "run-crawler=false" >> $GITHUB_OUTPUT
           else
