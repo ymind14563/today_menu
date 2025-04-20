@@ -24,6 +24,8 @@ def main():
     # ==================== 네이버 시작 ====================
     logger.info("=" * 25 + " [네이버 = 옆집] " + "=" * 25)
     naver_url = get_naver_menu_image_url()
+    last_urls.setdefault("naver", {})["last_checked"] = now_str
+
     if naver_url:
         is_new, is_today = is_new_url("naver", naver_url, last_urls)
         if is_new:
@@ -45,6 +47,8 @@ def main():
     # ==================== 카카오 시작 ====================
     logger.info("=" * 25 + " [카카오 = 2층] " + "=" * 25)
     kakao_url = get_kakao_menu_image_url()
+    last_urls.setdefault("kakao", {})["last_checked"] = now_str
+
     if kakao_url:
         is_new, is_today = is_new_url("kakao", kakao_url, last_urls)
         if is_new:
@@ -72,14 +76,18 @@ def main():
     logger.info("\n")
 
     # 저장
+    # 업데이트 된거만 (url, saved_date)
     if updated:
         last_urls.update(updated)
-        save_last_urls(last_urls)
+
+    # last_checked는 항상 저장
+    save_last_urls(last_urls)
+
 
     # 결과 요약 출력
     logger.info("-" * 29 + " 상태 요약 " + "-" * 29)
-    logger.info(naver_result)
     logger.info(kakao_result)
+    logger.info(naver_result)
     logger.info("-" * 69 + "\n")
 
     logger.info("[System] 크롤링 및 저장 완료")

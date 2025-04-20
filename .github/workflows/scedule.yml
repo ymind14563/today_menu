@@ -62,16 +62,22 @@ jobs:
           python menu_crawler/main.py
 
       - name: git push, html 업데이트
-        if: steps.check.outputs.run-crawler == 'true'
         run: |
-          git config --global user.name "ymind14563"
-          git config --global user.email "ymind14563@gmail.com"
-      
-          if git diff --quiet; then
-            echo "변경사항 없음"
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+          git add docs/
+          
+          if git diff --cached docs/last_urls.json | grep -qE '"url"|saved_date'; then
+            echo "주요 사항 변경"
+            git config --global user.name "ymind14563"
+            git config --global user.email "ymind14563@gmail.com"
+            git commit -m "update: $(date '+%Y-%m-%d %H:%M')"
           else
-            git add docs/
-            git commit -m "업데이트: $(date '+%Y-%m-%d %H:%M')"
-            git push
+            echo "last_checked 변경"
+            git commit -m "chore: last_checked ($(date '+%Y-%m-%d %H:%M'))"
           fi
+
+          git push
+  
         
