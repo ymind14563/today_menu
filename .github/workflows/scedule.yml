@@ -76,6 +76,9 @@ jobs:
 
           git add docs/
 
+          # 기존 grep은 삭제된 줄 포함 + 부분 문자열 탐지였기 때문에 오탐 => 정규식으로 보완
+          # ^ : 라인 시작,  \+ : git diff에서 추가된 줄만 탐지 (라인 앞에 '+' 붙음), .*"url": / .*"saved_date": : 해당 키가 포함된 라인인지 확인
+          # 반드시 "추가된 줄" 중에 "url" 또는 "saved_date"가 들어간 경우만 감지해야함
           if git diff --cached docs/last_urls.json | grep -qE '^\+.*"url":|^\+.*"saved_date":'; then
             echo "주요 사항 변경"
             git config --global user.name "ymind14563"
