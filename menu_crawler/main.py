@@ -30,12 +30,14 @@ def main():
             updated["naver"] = {"url": naver_url, "saved_date": now_str}
             naver_result = f"[네이버 = 옆집] 2층 이미지 URL: {naver_url}"
         else:
-            msg = (
-                "[네이버 = 옆집] 오늘 메뉴가 이미 수집됨."
-                if is_today else "[네이버 = 옆집] 아직 오늘 메뉴가 올라오지 않음."
-            )
+            msg = "[네이버 = 옆집] 오늘 메뉴가 이미 수집됨."
             logger.info(msg)
             naver_result = msg
+    else:
+            msg = "[네이버 = 옆집] 아직 오늘 메뉴가 올라오지 않음."
+            logger.info(msg)
+            naver_result = msg
+
     logger.info("\n")
 
     # ==================== 카카오 시작 ====================
@@ -48,12 +50,22 @@ def main():
             updated["kakao"] = {"url": kakao_url, "saved_date": now_str}
             kakao_result = f"[카카오 = 2층] 옆집 이미지 URL: {kakao_url}"
         else:
+            # if is_today:
+            #     msg = "[카카오 = 2층] 오늘 메뉴가 이미 수집됨."
+            # else:
+            #     msg = "[카카오 = 2층] 아직 오늘 메뉴가 올라오지 않음."
+
             msg = (
                 "[카카오 = 2층] 오늘 메뉴가 이미 수집됨."
                 if is_today else "[카카오 = 2층] 아직 오늘 메뉴가 올라오지 않음."
             )
             logger.info(msg)
             kakao_result = msg
+    else:
+            msg = "[카카오 = 2층] 프로필 사진이 비어 있음."
+            logger.info(msg)
+            kakao_result = msg
+
     logger.info("\n")
 
     # 저장
