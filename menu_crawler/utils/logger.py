@@ -14,8 +14,12 @@ stream_handler = logging.StreamHandler()
 KST = timezone(timedelta(hours=9))
 
 # 로그 출력 형식 및 시간대 적용
+def kst_converter(*args):
+    dt = datetime.now(KST)
+    return time.localtime(time.mktime(dt.timetuple()))
+
 formatter = logging.Formatter("[%(asctime)s] %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
-formatter.converter = lambda *args: time.localtime(time.mktime(datetime.now(KST).timetuple()))
+formatter.converter = kst_converter
 stream_handler.setFormatter(formatter)
 
 # 핸들러 연결
