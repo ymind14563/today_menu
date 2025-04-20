@@ -8,16 +8,19 @@ on:
 jobs:
   crawl-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Seoul
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.TODAY_MENU_TOKEN }}
 
       - name: 크롤링 필요 여부 확인
         id: check
         run: |
           echo "last_urls.json 조회 중..."
-          export TZ=Asia/Seoul
           TODAY=$(date '+%Y-%m-%d')
           echo "오늘 날짜: $TODAY"
 
@@ -60,13 +63,15 @@ jobs:
 
       - name: git push, html 업데이트
         if: steps.check.outputs.run-crawler == 'true'
-        env:
-          SECRET_TOKEN: ${{ secrets.TODAY_MENU_TOKEN }}
         run: |
           git config --global user.name "ymind14563"
           git config --global user.email "ymind14563@gmail.com"
-          git remote set-url origin https://${SECRET_TOKEN}@github.com/ymind14563/today_menu.git
-          git add docs/
-          git commit -m "업데이트: $(date '+%Y-%m-%d %H:%M')" || echo "변경사항 없음"
-          git push
+      
+          if git diff --quiet; then
+            echo "변경사항 없음"
+          else
+            git add docs/
+            git commit -m "업데이트: $(date '+%Y-%m-%d %H:%M')"
+            git push
+          fi
         
