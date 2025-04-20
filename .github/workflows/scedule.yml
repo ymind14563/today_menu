@@ -75,8 +75,8 @@ jobs:
           git config --global user.email "actions@github.com"
 
           git add docs/
-          
-          if git diff --cached docs/last_urls.json | grep -qE '"url"|saved_date'; then
+
+          if git diff --cached docs/last_urls.json | grep -qE '^\+.*"url":|^\+.*"saved_date":'; then
             echo "주요 사항 변경"
             git config --global user.name "ymind14563"
             git config --global user.email "ymind14563@gmail.com"
