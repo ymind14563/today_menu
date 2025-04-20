@@ -4,6 +4,7 @@ from utils.storage import load_last_urls, save_last_urls, is_new_url
 from utils.date_utils import get_today_date_string
 from utils.logger import logger
 from datetime import datetime, timedelta, timezone
+from utils.image import save_image_from_url
 
 KST = timezone(timedelta(hours=9))
 
@@ -28,6 +29,7 @@ def main():
         if is_new:
             logger.info("[네이버 = 옆집] 새로운 메뉴 이미지 감지됨.")
             updated["naver"] = {"url": naver_url, "saved_date": now_str}
+            save_image_from_url(naver_url, "naver")
             naver_result = f"[네이버 = 옆집] 2층 이미지 URL: {naver_url}"
         else:
             msg = "[네이버 = 옆집] 오늘 메뉴가 이미 수집됨."
@@ -48,6 +50,7 @@ def main():
         if is_new:
             logger.info("[카카오 = 2층] 새로운 메뉴 이미지 감지됨.")
             updated["kakao"] = {"url": kakao_url, "saved_date": now_str}
+            save_image_from_url(kakao_url, "kakao")
             kakao_result = f"[카카오 = 2층] 옆집 이미지 URL: {kakao_url}"
         else:
             # if is_today:
