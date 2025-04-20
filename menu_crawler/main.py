@@ -13,7 +13,7 @@ def main():
 
     now = datetime.now(KST)
     now_str = now.strftime("%Y-%m-%d %H:%M")
-    today_date = now.strftime("%Y-%m-%d")
+    # today_date = now.strftime("%Y-%m-%d")
 
     last_urls = load_last_urls()
     updated = {}
@@ -76,11 +76,11 @@ def main():
     logger.info("\n")
 
     # 저장
-    # 업데이트 된거만 (url, saved_date)
+    # 업데이트 된거만 덮어쓰기 (url, saved_date), last_checked 는 항상 수정
     if updated:
-        last_urls.update(updated)
+        for site, value in updated.items():
+            last_urls[site].update(value)
 
-    # last_checked는 항상 저장
     save_last_urls(last_urls)
 
 
