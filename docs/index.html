@@ -130,7 +130,11 @@
   <script>
     function updateStatus() {
       const now = new Date();
-      const today = now.toISOString().split("T")[0];
+      
+      // toISOString()은 UTC 기준으로 날짜를 변환
+      // 한국은 UTC+9이므로, 자정 직후에도 UTC 기준으로는 전날일 수 있음
+      // const today = now.toISOString().split("T")[0];
+      
 
       const formatTime = (date) => {
         const yyyy = date.getFullYear();
@@ -141,7 +145,9 @@
         return `${yyyy}-${mm}-${dd} ${hh}:${min}`;
       };
 
+      // 한국 기준 현재 시간
       const currentTimeStr = formatTime(now);
+      const today = currentTimeStr.split(" ")[0]
       
       // fetch("last_urls.json")
       // last_urls.json 요청 시마다 항상 다른 URL처럼 보이게 하여 강력새로고침 효과 유도
@@ -154,7 +160,21 @@
 
             const fullTime = info.saved_date;
             const checkedTime = info.last_checked;
-            const isToday = fullTime.startsWith(today);
+
+            // .startsWith() 은 앞 10글자(index 0~9)만 일치하면 일치라고 판단
+            // 지금 같은 경우 2025-04-2 까지 10글자이므로 2025-04-21이나 2025-04-22나 똑같다고 판단
+            // 날짜에선 절대 startsWith 쓰면 안됨.
+            // const isToday = fullTime.startsWith(today);
+            
+            // 날짜 비교(fullTime의 saved_date와 now의 date를 정확히 비교)
+            const savedDate = new Date(fullTime).toISOString().split("T")[0];
+            const isToday = savedDate === today;
+
+            // console.log(now)
+            // console.log(today)
+            // console.log(savedDate)
+            // console.log(isToday)
+
 
             const statusColor = isToday ? "bg-green-50 text-green-700" : "bg-yellow-50 text-yellow-700";
             const statusMsg = isToday ? "🟢 오늘 메뉴 업데이트 완료" : "🟨 오늘 메뉴가 업데이트 되지 않음";
