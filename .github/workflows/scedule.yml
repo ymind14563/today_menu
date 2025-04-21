@@ -70,6 +70,7 @@ jobs:
           python menu_crawler/main.py
 
       - name: git push, html 업데이트
+        if: steps.check.outputs.run-crawler == 'true'
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
