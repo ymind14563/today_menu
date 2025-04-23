@@ -10,7 +10,7 @@
 
   <h1 class="text-3xl font-bold text-center mb-8">🍱 오늘의 메뉴</h1>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-[1600px] mx-auto">
 
     <!-- 카카오 카드 -->
     <div class="flex flex-col justify-between bg-white p-5 rounded-xl shadow border w-full mx-auto sm:min-h-[580px]">
@@ -40,8 +40,22 @@
       </div>
     </div>
 
+    <!-- 카카오(2) 카드 -->
+    <div class="flex flex-col justify-between bg-white p-5 rounded-xl shadow border w-full mx-auto sm:min-h-[580px]">
+      <div>
+        <h2 class="text-3xl font-semibold text-center mb-5 text-gray-700">건너집</h2>
+        <div id="kakao_2_img" class="text-center mb-5">
+          <img class="w-full sm:w-11/12 h-auto mx-auto rounded-md" src="" alt="카카오_2 메뉴" />
+        </div>
+      </div>
+      <div class="mt-3">
+        <div id="kakao_2_status" class="mb-2 w-full max-w-[260px] mx-auto"></div>
+        <div id="kakao_2_timeinfo" class="w-full max-w-[260px] mx-auto"></div>
+      </div>
+    </div>
+
     <!-- 공지사항 -->
-    <div class="md:col-span-2 bg-white bg-gray-100 p-4 rounded-xl shadow mt-4 text-base text-left leading-relaxed text-gray-700 w-full">
+    <div class="md:col-span-3 bg-white bg-gray-100 p-4 rounded-xl shadow mt-4 text-base text-left leading-relaxed text-gray-700 w-full">
       <div class="flex items-start gap-2">
         <span class="text-[1rem] leading-[1.2] mt-[1px]">📝</span>
         <span><strong>업데이트:</strong> 실제로 메뉴 이미지가 바뀐 시각입니다. <br> <strong>최근확인:</strong> 업데이트 할 메뉴 이미지가 있는지 최근 확인한 시각입니다.</span>      
@@ -53,7 +67,7 @@
       </div>
       <div class="flex items-start gap-2">
         <span class="text-[1rem] leading-[1.2] mt-[1px]">ℹ️</span>
-        <span>출처 이미지의 <strong>업로드 여부를 주기적으로 감지</strong>하여 자동 업데이트됩니다.</span>
+        <span>출처 이미지의 <strong>업로드 여부를 주기적으로 감지</strong>하여 업데이트됩니다.</span>
       </div>
       <div class="flex items-start gap-2">
         <span class="text-[1rem] leading-[1.2] mt-[1px]">ℹ️</span>
@@ -65,40 +79,52 @@
       </div>
       <div class="flex items-start gap-2">
         <span class="text-[1rem] leading-[1.2] mt-[1px]">ℹ️</span>
-        <span>이미지 업로드 지연으로 인해 <strong>이전 메뉴</strong>가 남아 있을 수 있으니, <strong>업데이트 상태</strong>를 꼭 확인해주세요.</span>
+        <span>이미지 업로드 지연으로 인해 <strong>이전 메뉴</strong>가 남아 있을 수 있으니, <strong>업데이트 상태(🟢🟨)</strong>를 꼭 확인해주세요.</span>
       </div>
+      <br />
       <div class="flex items-start gap-2">
         <span class="text-[1rem] leading-[1.2] mt-[1px]">🛠️</span>
         <span>간혹 브라우저에 저장된 <strong>캐시</strong> 때문에 화면이 이상하게 보일 수 있습니다. 그럴 땐 <strong>페이지를 새로고침(Ctrl + Shift + R) 해주세요.</strong></span>
       </div>
-      
+      <div class="flex items-start gap-2">
+        <span class="text-[1rem] leading-[1.2] mt-[1px]">💡</span>
+        <span>본 페이지는 가로 1660px 기준으로 최적화되어 있으며, 반응형으로 제작되었습니다.</span>
+      </div>
     </div>
     
     
 
     <!-- 출처 -->
-    <div class="md:col-span-2 bg-white bg-gray-100 p-4 rounded-xl shadow text-sm text-left text-gray-700">
-      <p class="mb-1">🌐 <strong>2층 (에이스굿푸드)</strong>: 
+    <div class="md:col-span-3 bg-white bg-gray-100 p-4 rounded-xl shadow text-sm text-left text-gray-700">
+      <p>🥢 <strong>2층 (에이스굿푸드)</strong>: 
         <a href="https://pf.kakao.com/_xdxagIn" class="text-blue-600 underline" target="_blank">https://pf.kakao.com/_xdxagIn</a>
       </p>
-      <p>📎 <strong>옆집 (오늘의 밥상)</strong>: 
+      <p>🍚 <strong>옆집 (오늘의 밥상)</strong>: 
         <a href="https://blog.naver.com/skfoodcompany" class="text-blue-600 underline" target="_blank">https://blog.naver.com/skfoodcompany</a>
+      </p>
+      <p>🍲 <strong>건너집 (하우스디비즈)</strong>: 
+        <a href="https://pf.kakao.com/_VztIb" class="text-blue-600 underline" target="_blank">https://pf.kakao.com/_VztIb</a>
       </p>
     </div>
   
 
     <!-- 안내 -->
-    <div class="md:col-span-2 bg-white p-4 rounded-xl shadow mt-5 text-sm text-left text-gray-700">
+    <div class="md:col-span-3 bg-white p-4 rounded-xl shadow mt-5 text-sm text-left text-gray-700">
     <p class="mb-1">
-        📌 <b>오늘의 메뉴 (ver. 1)</b><br />
+        📌 <b>오늘의 메뉴 (ver. 1.1)</b><br />
         매번 링크 찾아 들어가는 게 번거로워서 제작하게 되었습니다. <br /> 
         주말 동안 공부도 할 겸, 심심해서 만들어봤습니다. <br />
         귀차니즘이 조금이나마 덜어졌으면 좋겠습니다. <br />
         <br />
+        
+        ♻️ 업데이트 내역<br />
+        - 2025.04.23: '건너집' 추가, 3개 메뉴 카드 구성으로 변경<br />
+        <br />
+
         제작일: 2025.04.19 <br />  
         👨‍💻 made by SWJ  <br />
         <br>
-        피드백은 언제나 환영입니다. 👋 <br />
+        오류 제보와 피드백은 언제나 환영입니다. 👋 <br />
         <a href="https://github.com/ymind14563/today_menu" class="text-blue-600 underline" target="_blank">https://github.com/ymind14563/today_menu</a>
         
     </p>
@@ -106,7 +132,7 @@
 
 
     <!-- 기술 스택 -->
-    <div class="md:col-span-2 bg-white p-4 rounded-xl shadow mt-4 text-sm font-semibold text-left text-gray-700 flex flex-wrap items-center gap-4 justify-center">
+    <div class="md:col-span-3 bg-white p-4 rounded-xl shadow mt-4 text-sm font-semibold text-left text-gray-700 flex flex-wrap items-center gap-4 justify-center">
       <div class="flex items-center gap-2">
       <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="w-5 h-5" />
       <span>Python 3</span>
@@ -158,7 +184,7 @@
       fetch(`last_urls.json?t=${Date.now()}`)
         .then(res => res.json())
         .then(data => {
-          ["kakao", "naver"].forEach(site => {
+          ["kakao", "naver", "kakao_2"].forEach(site => {
             const info = data[site];
             if (!info) return;
 
@@ -178,7 +204,7 @@
             // console.log(today)
             // console.log(savedDate)
             // console.log(isToday)
-
+            
 
             const statusColor = isToday ? "bg-green-50 text-green-700" : "bg-yellow-50 text-yellow-700";
             const statusMsg = isToday ? "🟢 오늘 메뉴 업데이트 완료" : "🟨 오늘 메뉴가 업데이트 되지 않음";
@@ -201,7 +227,7 @@
             timeBox.className =
               "bg-gray-100 rounded-md py-2 px-3 mt-3 text-[0.9rem] text-center font-mono text-gray-700 whitespace-pre-line";
             timeBox.innerHTML =
-              `<strong>⏰ 업데이트 : ${fullTime}<br /><strong>⌛ 최근확인 : ${checkedTime}<br />🕒 현재시각 : ${currentTimeStr}</strong>`;
+              `<strong>⏰ 업데이트 : ${fullTime}<br />⌛ 최근확인 : ${checkedTime}<br />🕒 현재시각 : ${currentTimeStr}</strong>`;
 
 
           });

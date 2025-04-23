@@ -1,5 +1,6 @@
 from crawlers.naver import get_naver_menu_image_url
 from crawlers.kakao import get_kakao_menu_image_url
+from crawlers.kakao_2 import get_kakao_2_menu_image_url
 from utils.storage import load_last_urls, save_last_urls, is_new_url
 from utils.date_utils import get_today_date_string
 from utils.logger import logger
@@ -20,6 +21,7 @@ def main():
 
     kakao_result = ""
     naver_result = ""
+    kakao_2_result = ""
 
     # ==================== 네이버 시작 ====================
     logger.info("=" * 25 + " [네이버 = 옆집] " + "=" * 25)
@@ -75,6 +77,31 @@ def main():
 
     logger.info("\n")
 
+
+    # ==================== 카카오_2 시작 ====================
+    logger.info("=" * 23 + " [카카오_2 = 건너집] " + "=" * 23)
+    kakao_2_url = get_kakao_2_menu_image_url()
+    last_urls.setdefault("kakao_2", {})["last_checked"] = now_str
+
+    if kakao_2_url:
+        is_new, is_today = is_new_url("kakao_2", kakao_2_url, last_urls)
+        if is_new:
+            logger.info("[카카오_2 = 건너집] 새로운 메뉴 이미지 감지됨.")
+            updated["kakao_2"] = {"url": kakao_2_url, "saved_date": now_str}
+            save_image_from_url(kakao_2_url, "kakao_2")
+            kakao_2_result = f"[카카오_2 = 건너집] 2층 이미지 URL: {kakao_2_url}"
+        else:
+            msg = "[카카오_2 = 건너집] 오늘 메뉴가 이미 수집됨."
+            logger.info(msg)
+            kakao_2_result = msg
+    else:
+            msg = "[카카오_2 = 건너집] 아직 오늘 메뉴가 올라오지 않음."
+            logger.info(msg)
+            kakao_2_result = msg
+
+    logger.info("\n")
+
+
     # 저장
     # 업데이트 된거만 덮어쓰기 (url, saved_date), last_checked 는 항상 수정
     if updated:
@@ -88,6 +115,7 @@ def main():
     logger.info("-" * 29 + " 상태 요약 " + "-" * 29)
     logger.info(kakao_result)
     logger.info(naver_result)
+    logger.info(kakao_2_result)
     logger.info("-" * 69 + "\n")
 
     logger.info("[System] 크롤링 및 저장 완료")

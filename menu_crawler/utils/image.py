@@ -15,7 +15,8 @@ def save_image_from_url(url: str, label: str) -> bool:
     # logger 용 한글 라벨 매핑
     display_name = {
         "naver": "네이버",
-        "kakao": "카카오"
+        "kakao": "카카오",
+        "kakao_2" : "카카오_2"
     }.get(label)
 
     try:

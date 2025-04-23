@@ -9,6 +9,7 @@ KST = timezone(timedelta(hours=9))
 # 사이트 URL
 NAVER_BLOG_URL = "https://blog.naver.com/skfoodcompany"
 KAKAO_CHANNEL_URL = "https://pf.kakao.com/_xdxagIn"
+KAKAO_2_CHANNEL_URL = "https://pf.kakao.com/_VztIb"
 
 # 날짜 포맷 (오늘 날짜 기준, 예: '4월 18일')
 TODAY = datetime.now(KST)
