@@ -233,7 +233,23 @@
             // const isToday = fullTime.startsWith(today);
             
             // 날짜 비교(fullTime의 saved_date와 now의 date를 정확히 비교)
-            const savedDate = new Date(fullTime).toISOString().split("T")[0];
+            // const savedDate = new Date(fullTime).toISOString().split("T")[0];
+
+            /**
+             * const savedDate = new Date(fullTime).toISOString().split("T")[0]; 이 코드는
+             * fullTime인 2025-06-24 08:10 를 날짜 객체로 바꿔서 T 기준으로 split하는 것
+             * 이렇게 되면 시간대 문제가 생김
+             * .toISOString() 은 KST 였던 시간대를 UTC 로 다시 바꾸는 영향이 있음
+             * 결론적으로 UTC -> KST -> UTC 로 비교하고 있었음 
+             * 근데 지금까지 문제가 없었던 이유는
+             * KST 09시는 UTC기준 00시 (+ 09:00)
+             * 이전에는 첫 크롤링이 한국 시간 09시부터 시작이였기 때문에 날짜가 잘못비교 될 일이 없었으나,
+             * 기준이 되는 09시 이전인 [24일 08시] 에 크롤링이 시작되면 [UTC 기준으로 23일 23시] 가 되기 때문에 그 전날이 됨
+             * 그래서 날짜 비교 시에 맞지 않는 현상 발생
+             * 결론적으로 fullTime인 2025-06-24 08:10 이 한국 시간이므로 이걸 그대로 빈칸 기준으로 자르면
+             * UTC로 변환되는 일이 없고 정상작동함.
+             */ 
+            const savedDate = fullTime.split(" ")[0]
             const isToday = savedDate === today;
 
             // console.log(now)
