@@ -25,7 +25,7 @@ def is_today_in_title(title: str) -> bool:
     pattern = rf"{m}\s*월[^0-9a-zA-Z가-힣]{{0,5}}{d}\s*일"
     
     return re.search(pattern, title) is not None
-    # return "4월 18일"
+    # return True # 테스트용
     
 
 

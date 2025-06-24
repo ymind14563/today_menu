@@ -10,7 +10,15 @@ def save_image_from_url(url: str, label: str) -> bool:
 
     # label을 기준으로 파일명 자동 설정, 다운로드, 저장
     filename = f"{label}.jpg"
-    path = os.path.join("docs/images", filename)
+
+    # 기존 상대경로
+    # path = os.path.join("docs/images", filename)
+
+    # 절대 경로로 변경
+    main_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
+    docs_path = os.path.join(main_dir, "docs", "images")
+    path = os.path.join(docs_path, filename)
+
 
     # logger 용 한글 라벨 매핑
     display_name = {
@@ -37,7 +45,7 @@ def save_image_from_url(url: str, label: str) -> bool:
             f.write(response.content)
 
         logger.info(f"[{display_name}] 이미지 다운로드 및 저장 완료: {path}")
-        return True
+        return path
 
     except Exception as e:
         logger.info(f"[{display_name}] 이미지 저장 실패: {str(e)}")

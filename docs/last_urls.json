@@ -1,17 +1,23 @@
 {
   "kakao": {
-    "url": "https://k.kakaocdn.net/dn/dcVn8G/btsNZ2IsZqq/9gAwfQt2u2tmGtvgDePfxk/img_xl.jpg",
-    "saved_date": "2025-05-16 11:18",
-    "last_checked": "2025-05-16 11:18"
+    "url": "https://k.kakaocdn.net/dn/PdvnC/btsObntngbc/pjJVSlwzPLGWzpMuuh8jtk/img_xl.jpg",
+    "saved_date": "2025-05-26 22:21",
+    "last_checked": "2025-05-26 22:34",
+    "ocr": {
+      "text": "이륵어\n룡룡\n논롬크우\n안동찜닭\n미트소세지볶음\n금교포문\n오공고트릎r\n열무된장겉절이",
+      "generated": "2025-05-26 22:21"
+    }
   },
   "naver": {
-    "url": "https://postfiles.pstatic.net/MjAyNTA1MTZfMTAx/MDAxNzQ3MzIyNDM2MDEw.uZlRUQOGI0jQNgpCrFNHLFypKHCPBVZ2ej9JTBc8avIg.h35caUI04gcUW1uGzttNa6IsXuKQs14sl1x_uu1cWWgg.JPEG/900%EF%BC%BF20250516%EF%BC%BF001923.jpg?type=w773",
-    "saved_date": "2025-05-16 11:18",
-    "last_checked": "2025-05-16 11:18"
+    
   },
   "kakao_2": {
-    "last_checked": "2025-05-16 11:18",
-    "url": "https://k.kakaocdn.net/dn/TYHTY/btsN0CJf0DW/kkIy59kNiOb9b9fK29YlYk/img_xl.jpg",
-    "saved_date": "2025-05-16 11:18"
+    "url": "https://k.kakaocdn.net/dn/poNIt/btsObTyhDHb/N2fWOM3tWwYympeCK2qsN1/img_xl.jpg",
+    "saved_date": "2025-05-26 22:21",
+    "last_checked": "2025-05-26 22:34",
+    "ocr": {
+      "text": "그늪弓ll\nComfortable mea!\n식사시'간:오전11시",
+      "generated": "2025-05-26 22:21"
+    }
   }
 }
