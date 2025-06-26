@@ -33,7 +33,7 @@ jobs:
         id: check
         run: |
           echo "last_urls.json 조회 중..."
-          TODAY=$(date '+%Y-%m-%d')
+          TODAY=$(TZ='Asia/Seoul' date '+%Y-%m-%d')
           echo "오늘 날짜: $TODAY"
 
           if [ ! -f docs/last_urls.json ]; then
